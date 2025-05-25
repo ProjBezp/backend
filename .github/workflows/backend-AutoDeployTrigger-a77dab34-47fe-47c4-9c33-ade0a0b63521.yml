@@ -30,6 +30,13 @@ jobs:
           client-id: ${{ secrets.BACKEND_AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.BACKEND_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.BACKEND_AZURE_SUBSCRIPTION_ID }}
+          
+      - name: Log in to GitHub container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.CR_PAT }}
 
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
