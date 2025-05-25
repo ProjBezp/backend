@@ -41,7 +41,7 @@ jobs:
           registryPassword: ${{ secrets.BACKEND_REGISTRY_PASSWORD }}
           containerAppName: backend
           resourceGroup: pm-rg
-          imageToBuild: ghcr.io/ProjBezp/backend:${{ github.sha }}
+          imageToBuild: ghcr.io/projbezp/backend:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
 
