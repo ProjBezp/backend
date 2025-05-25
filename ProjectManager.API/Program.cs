@@ -40,11 +40,12 @@ namespace ProjectManager.API
 
             // migrate database
             SeedData.Initialize(app);
-
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
             app.UseCors("AllowSpecificOrigin");
+            app.MapFallbackToFile("index.html");
 
             app.Urls.Add("http://*:5000");
 

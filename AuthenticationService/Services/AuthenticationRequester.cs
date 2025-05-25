@@ -38,6 +38,7 @@ namespace AuthenticationService.Services
                 {
                     var response = await client.SendAsync(request);
                     var content = await response.Content.ReadAsStringAsync();
+                    _logger.LogDebug("{c}", content);
                     return Guid.Parse(content);
                 }
                 catch (Exception e)
@@ -63,6 +64,7 @@ namespace AuthenticationService.Services
                 {
                     var response = await client.SendAsync(request);
                     var content = await response.Content.ReadAsStringAsync();
+                    _logger.LogDebug("{c}", content);
                     return Guid.Parse(content);
                 }
                 catch (Exception e)

@@ -16,8 +16,15 @@ namespace ProjectManager.API.Controllers
         [HttpPost("token")]
         public async Task<IActionResult> AuthorizeToken([FromBody] AuthTokenModel model)
         {
-            model.TokenId = model.TokenId.Replace("\"", "");
-            return FromCommandResult(await _mediator.Send(new AuthenticateTokenQuery(Guid.TryParse(model.TokenId, out Guid result) ? result : Guid.NewGuid())));
+            try
+            {
+                model.TokenId = model.TokenId.Replace("\"", "");
+                return FromCommandResult(await _mediator.Send(new AuthenticateTokenQuery(Guid.TryParse(model.TokenId, out Guid result) ? result : Guid.NewGuid())));
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("check")]

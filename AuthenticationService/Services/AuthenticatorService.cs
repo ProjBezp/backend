@@ -27,8 +27,10 @@ namespace AuthenticationService.Services
             if (!Guid.TryParse(request.Token, out var tokenId))
                 return null;
 
+            _logger.LogInformation("Requested token {id}", request.Token);
+            
             var token = _store.Get(tokenId);
-            _logger.LogInformation("Requested token {id}", token.TokenId);
+            
             if (token is null || token.ExpiresAt < DateTime.Now)
                 return null;
 

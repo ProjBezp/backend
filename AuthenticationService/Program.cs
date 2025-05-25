@@ -19,25 +19,27 @@ public class Program
 
         builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.OptionsKey));
         builder.Services.AddSingleton<TokenStore>();
-        builder.Services.AddSingleton<IAuthenticator, AuthenticatorService>();
+        builder.Services.AddScoped<IAuthenticator, AuthenticatorService>();
 
-        /*builder.Services.AddCors(options =>
+        builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowSpecificOrigin", policy =>
                 policy.WithOrigins("*")
                       .AllowAnyMethod()
                       .AllowAnyHeader()
             );
-        });*/
+        });
 
         builder.Services.AddControllers();
 
         var app = builder.Build();
 
+        app.Urls.Add("http://localhost:6000");
+
         // Configure the HTTP request pipeline.
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection();
         app.MapControllers();
-        //app.UseCors("AllowSpecificOrigin");
+        app.UseCors("AllowSpecificOrigin");
         app.MapGet("/", () => "OK");
 
         app.Run();

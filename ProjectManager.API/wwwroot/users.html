@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Użytkownicy</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <script defer type="module" src="js/users.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">PROJECT MANAGER</div>
+            <nav>
+                <a href="index.html" class="nav-item">Strona Główna</a>
+                <a href="projects.html" class="nav-item">Projekty</a>
+                <a href="users.html" class="nav-item active">Użytkownicy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Użytkownicy</h1>
+                <p>
+                    Dodawaj, edytuj lub usuwaj użytkowników. Przypisz role (Owner, Editor, Creator) oraz dopasuj ich do projektów.
+                </p>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Lista użytkowników</h2>
+            <div class="features-grid" id="user-list">
+                <!-- Lista użytkowników zostanie wygenerowana dynamicznie tutaj -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Project Manager. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+</body>
+</html>
