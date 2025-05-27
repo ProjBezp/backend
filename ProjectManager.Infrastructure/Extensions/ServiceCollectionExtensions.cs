@@ -15,8 +15,17 @@ namespace ProjectManager.Infrastructure.Extensions
             services.AddDbContext<AppDbContext>(options =>
             {
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-                    .EnableSensitiveDataLogging();
+
+                try
+                {
+                    options.UseSqlServer(connectionString)
+                           .EnableSensitiveDataLogging();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[ERROR] Database configuration error: {ex.Message}");
+                    throw;
+                }
             });
 
             services.AddScoped<IUserRepository, UserRepository>();

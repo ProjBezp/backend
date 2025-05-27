@@ -9,8 +9,16 @@ namespace ProjectManager.API
 {
     public class Program
     {
+
         public static void Main(string[] args)
         {
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                Console.WriteLine("Unhandled Exception: " + e.ExceptionObject?.ToString());
+            };
+
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers()
@@ -39,15 +47,26 @@ namespace ProjectManager.API
             var app = builder.Build();
 
             // migrate database
-            SeedData.Initialize(app);
+            try
+            {
+                SeedData.Initialize(app);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[FATAL SEEDING ERROR] {ex.Message}");
+                // Optional: don't rethrow
+            }
+
             app.UseStaticFiles();
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
             app.UseCors("AllowSpecificOrigin");
-            app.MapFallbackToFile("index.html");
+            app.MapFallbackToFile("log.html");
+            // app.MapGet("/", () => "OK");
+            app.MapGet("/health", () => "OK");
 
-            app.Urls.Add("http://*:5000");
+            app.Urls.Add("http://*:80");
 
             app.Run();
         }
@@ -57,13 +76,20 @@ namespace ProjectManager.API
     {
         public static void Initialize(WebApplication app)
         {
-            using (var serviceScope = app.Services.CreateScope())
+            try
             {
-                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-
-                // auto migration
-                context.Database.Migrate();
+                using var scope = app.Services.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[SEED ERROR] B³¹d podczas inicjalizacji danych: {ex.Message}");
+                throw;
             }
         }
     }
+
+
+    
 }

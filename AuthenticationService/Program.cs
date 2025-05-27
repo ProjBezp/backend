@@ -1,4 +1,4 @@
-using AuthenticationService.Contracts;
+/*using AuthenticationService.Contracts;
 using AuthenticationService.Options;
 using AuthenticationService.Services;
 using ProjectManager.Infrastructure.Extensions;
@@ -44,4 +44,4 @@ public class Program
 
         app.Run();
     }
-}
+}*/

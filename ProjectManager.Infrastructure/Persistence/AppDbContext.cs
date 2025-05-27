@@ -21,9 +21,16 @@ namespace ProjectManager.Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseMySql(_config.GetConnectionString("DefaultConnection"),
-                    ServerVersion.AutoDetect(_config.GetConnectionString("DefaultConnection")));
+            try
+            {
+                if (!optionsBuilder.IsConfigured)
+                    optionsBuilder.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Database configuration error: {ex.Message}");
+                throw;
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
