@@ -1,4 +1,4 @@
-﻿namespace ProjectManager.Domain.Models
+﻿namespace ProjectManager.Domain.Entities
 {
     public sealed class AccessToken
     {

@@ -18,6 +18,7 @@ namespace ProjectManager.Infrastructure.Persistence
         public DbSet<UserProject> UserProjects { get; set; }
         public DbSet<ProjectTask> ProjectTasks { get; set; }
         public DbSet<TaskComment> TaskComments { get; set; }
+        public DbSet<AccessToken> Tokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -58,7 +59,8 @@ namespace ProjectManager.Infrastructure.Persistence
             modelBuilder.Entity<ProjectTask>()
                 .Property(pt => pt.Id)
                 .ValueGeneratedOnAdd();
-
+            modelBuilder.Entity<AccessToken>()
+                .HasNoKey();
 
             modelBuilder.Entity<UserProject>()
                 .HasKey(up => new { up.UserId, up.ProjectId });

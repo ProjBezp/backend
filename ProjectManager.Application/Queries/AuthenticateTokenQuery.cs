@@ -1,6 +1,8 @@
-﻿using AuthenticationService.Contracts;
-using MediatR;
+﻿using MediatR;
+using Microsoft.Extensions.Options;
 using ProjectManager.Application.Common;
+using ProjectManager.Application.Options;
+using ProjectManager.Domain.Contracts;
 
 namespace ProjectManager.Application.Queries
 {
@@ -8,22 +10,34 @@ namespace ProjectManager.Application.Queries
 
     public class AuthenticateTokenQueryHandler : IRequestHandler<AuthenticateTokenQuery, CommandResult>
     {
-        private readonly IAuthenticationRequester _auth;
+        private readonly ITokenRepository _repo;
+        private readonly IOptions<AuthenticationOptions> _options;
 
-        public AuthenticateTokenQueryHandler(IAuthenticationRequester auth)
+        public AuthenticateTokenQueryHandler(ITokenRepository repo, IOptions<AuthenticationOptions> options)
         {
-            _auth = auth;
+            _repo = repo;
+            _options = options;
         }
 
         public async Task<CommandResult> Handle(AuthenticateTokenQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                var token = await _auth.SendTokenRequest(request.TokenId);
+                var token = await _repo.Get(request.TokenId);
 
-                return token is not null
-                    ? CommandResult.Success(token)
-                    : CommandResult.Failed("Not authorized", 401);
+                if (token is null)
+                    return CommandResult.Failed("Not authorized", 401);
+
+                if (token.ExpiresAt < DateTime.Now.Add(_options.Value.AccessTokenLifeTime))
+                {
+                    await _repo.Remove(token);
+                    return CommandResult.Failed("Not authorized", 401);
+                }
+
+                token.ExpiresAt = DateTime.Now.Add(_options.Value.AccessTokenLifeTime);
+                await _repo.Commit();
+
+                return CommandResult.Success(token);
             }
             catch (Exception e)
             {

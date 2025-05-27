@@ -18,6 +18,9 @@ namespace ProjectManager.API.Controllers
         {
             try
             {
+                if (model is null)
+                    throw new Exception("Null token");
+
                 model.TokenId = model.TokenId.Replace("\"", "");
                 return FromCommandResult(await _mediator.Send(new AuthenticateTokenQuery(Guid.TryParse(model.TokenId, out Guid result) ? result : Guid.NewGuid())));
             }

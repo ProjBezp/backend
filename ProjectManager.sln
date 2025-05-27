@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.API", "ProjectManager.API\ProjectManager.API.csproj", "{231745E4-EBCE-4456-9FD1-50A40D2C0B01}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationService", "AuthenticationService\AuthenticationService.csproj", "{DCFCEE21-1426-4E90-B1EA-1280842A2C4A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,15 +33,8 @@ Global
 		{231745E4-EBCE-4456-9FD1-50A40D2C0B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{231745E4-EBCE-4456-9FD1-50A40D2C0B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{231745E4-EBCE-4456-9FD1-50A40D2C0B01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCFCEE21-1426-4E90-B1EA-1280842A2C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCFCEE21-1426-4E90-B1EA-1280842A2C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCFCEE21-1426-4E90-B1EA-1280842A2C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCFCEE21-1426-4E90-B1EA-1280842A2C4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{DCFCEE21-1426-4E90-B1EA-1280842A2C4A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 EndGlobal

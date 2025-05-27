@@ -1,6 +1,6 @@
-﻿using AuthenticationService.Extensions;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProjectManager.Application.Options;
 
 namespace ProjectManager.Application.Extensions
 {
@@ -12,7 +12,11 @@ namespace ProjectManager.Application.Extensions
             {
                 options.RegisterServicesFromAssembly(typeof(MediatRRoot).Assembly);
             });
-            services.AddAuthenticationRequester(config);
+        }
+
+        public static void AddAuthenticationOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.OptionsKey));
         }
     }
 }
