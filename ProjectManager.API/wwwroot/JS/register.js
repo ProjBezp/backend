@@ -1,4 +1,4 @@
-const registerUrl = "http://localhost:5000/api/register"
+const registerUrl = "http://localhost:80/api/register"
 
 async function registerUser(){
     form = document.getElementById("registerForm")

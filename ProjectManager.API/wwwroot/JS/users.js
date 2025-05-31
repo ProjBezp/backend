@@ -1,9 +1,9 @@
 import { validate } from "./log_validation.js";
 
-const getAllUrl = 'http://localhost:5000/api/users/all'; 
-const deleteUrl = 'http://localhost:5000/api/users/delete/#id'
-const addUrl = "http://localhost:5000/api/users/add"
-const editUrl = "http://localhost:5000/api/users/update"
+const getAllUrl = 'http://localhost:80/api/users/all'; 
+const deleteUrl = 'http://localhost:80/api/users/delete/#id'
+const addUrl = "http://localhost:80/api/users/add"
+const editUrl = "http://localhost:80/api/users/update"
 
 
 async function handleUsers() {

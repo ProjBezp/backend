@@ -1,50 +1,50 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edytuj Projekt</title>
-    <link rel="stylesheet" href="CSS/styles.css"> <!-- Łącze do zaktualizowanego CSS -->
+    <title>Edit Project</title>
+    <link rel="stylesheet" href="CSS/styles.css">
     <script defer src="js/update_projects.js"></script>
 </head>
 <body>
 
     <main>
         <div class="container">
-           
-                <form id="editProjectForm" class="addForm">
-                    <h1>Edytuj projekt</h1>
 
-                    <label for="name">Nazwa projektu:</label>
-                    <input type="text" id="name" name="name" required>
+            <form id="editProjectForm" class="addForm">
+                <h1>Edit Project</h1>
 
-                    <label for="description">Opis projektu:</label>
-                    <textarea id="description" name="description" rows="4" required></textarea>
+                <label for="name">Project Name:</label>
+                <input type="text" id="name" name="name" required>
 
-                    <label for="startDate">Data rozpoczęcia:</label>
-                    <input type="date" id="startDate" name="startDate" required>
+                <label for="description">Project Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
 
-                    <label for="endDate">Data zakończenia:</label>
-                    <input type="date" id="endDate" name="endDate" required>
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required>
 
-                    <label for="status">Status:</label>
-                    <select id="status" name="status" required>
-                        <option value="ToDo">Zaplanowany</option>
-                        <option value="InProgress">W toku</option>
-                        <option value="Completed">Zakończony</option>
-                        <option value="Cancelled">Anulowany</option>
-                    </select>
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required>
 
-                    <label for="priority">Priorytet:</label>
-                    <select id="priority" name="priority" required>
-                        <option value="Low">Niski</option>
-                        <option value="Medium">Średni</option>
-                        <option value="High">Wysoki</option>
-                    </select>
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="ToDo">Planned</option>
+                    <option value="InProgress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
 
-                    <button type="submit">Zapisz zmiany</button>
-                </form>
-           
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+
+                <button type="submit">Save Changes</button>
+            </form>
+
         </div>
     </main>
 </body>

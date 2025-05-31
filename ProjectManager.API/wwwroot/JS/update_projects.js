@@ -1,9 +1,9 @@
-const updateProjectUrl = "http://localhost:5000/api/projects/update"; // URL do edycji projektu
+const updateProjectUrl = "http://localhost:80/api/projects/update"; // URL do edycji projektu
 let currentProjectId = null; // Przechowuje ID edytowanego projektu
 
 // Funkcja do pobrania projektu i wypełnienia formularza
 function editProject(projectId) {
-    fetch(`http://localhost:5000/api/projects/${projectId}`)
+    fetch(`http://localhost:80/api/projects/${projectId}`)
         .then(response => response.json())
         .then(project => {
             currentProjectId = projectId; // Przypisanie ID edytowanego projektu
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (projectId) {
         try {
-            const response = await fetch(`http://localhost:5000/api/projects/${projectId}`);
+            const response = await fetch(`http://localhost:80/api/projects/${projectId}`);
             const project = await response.json();
 
             const form = document.getElementById("editProjectForm");

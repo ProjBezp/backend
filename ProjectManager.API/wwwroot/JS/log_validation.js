@@ -1,5 +1,5 @@
-const getTokenUrl = "http://localhost:5000/api/auth/user";
-const validateUrl = "http://localhost:5000/api/auth/token"
+const getTokenUrl = "http://localhost:80/api/auth/user";
+const validateUrl = "http://localhost:80/api/auth/token"
 
 export function validate(){
     const tokenBody = {

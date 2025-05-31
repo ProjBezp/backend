@@ -11,38 +11,38 @@
 
     <main>
         <div class="container">
-                <form id="projectForm" class="addForm">
-                    <h1>Dodaj nowy projekt</h1>
+            <form id="projectForm" class="addForm">
+                <h1>Add New Project</h1>
 
-                    <label for="name">Nazwa projektu:</label>
-                    <input type="text" id="name" name="name" required>
+                <label for="name">Project Name:</label>
+                <input type="text" id="name" name="name" required>
 
-                    <label for="description">Opis projektu:</label>
-                    <textarea id="description" name="description" rows="4" required></textarea>
+                <label for="description">Project Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
 
-                    <label for="startDate">Data rozpoczęcia:</label>
-                    <input type="date" id="startDate" name="startDate" required>
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required>
 
-                    <label for="endDate">Data zakończenia:</label>
-                    <input type="date" id="endDate" name="endDate" required>
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required>
 
-                    <label for="status">Status:</label>
-                    <select id="status" name="status" required>
-                        <option value="ToDo">Zaplanowany</option>
-                        <option value="InProgress">W toku</option>
-                        <option value="Completed">Zakończony</option>
-                        <option value="Cancelled">Anulowany</option>
-                    </select>
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="ToDo">Planned</option>
+                    <option value="InProgress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
 
-                    <label for="priority">Priorytet:</label>
-                    <select id="priority" name="priority" required>
-                        <option value="Low">Niski</option>
-                        <option value="Medium">Średni</option>
-                        <option value="High">Wysoki</option>
-                    </select>
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
 
-                    <button class="btn" type="submit">Dodaj Projekt</button>
-                </form>
+                <button class="btn" type="submit">Add Project</button>
+            </form>
         </div>
     </main>
 </body>

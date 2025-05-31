@@ -1,4 +1,4 @@
-const addUserUrl = "http://localhost:5000/api/users/add";
+const addUserUrl = "http://localhost:80/api/users/add";
 
 // Funkcja do dodawania użytkownika
 function addUser(event) {

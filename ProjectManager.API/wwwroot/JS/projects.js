@@ -1,7 +1,7 @@
-const getAllProjectsUrl = "http://localhost:5000/api/projects/all";
-const deleteProjectUrl = "http://localhost:5000/api/projects/delete/#id";
-const addProjectUrl = "http://localhost:5000/api/projects/add";
-const editProjectUrl = "http://localhost:5000/api/projects/update";
+const getAllProjectsUrl = "http://localhost:80/api/projects/all";
+const deleteProjectUrl = "http://localhost:80/api/projects/delete/#id";
+const addProjectUrl = "http://localhost:80/api/projects/add";
+const editProjectUrl = "http://localhost:80/api/projects/update";
 
 // Pobieranie i wyświetlanie projektów
 async function fetchProjects() {
