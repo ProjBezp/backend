@@ -3,50 +3,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
-    <script defer type="module" src="JS/update_user.js"></script> <!-- Użycie defer, aby skrypt załadował się po stronie -->
-    <title>Edytuj</title>
+    <script defer type="module" src="JS/update_user.js"></script> <!-- Using defer to load the script after the page -->
+    <title>Edit User</title>
 </head>
 <body>
     <header>
         <div class="header-container">
             <div class="logo">PROJECT MANAGER</div>
             <nav>
-                <a href="index.html" class="nav-item">Strona Główna</a>
-                <a href="projects.html" class="nav-item">Projekty</a>
-                <a href="users.html" class="nav-item active">Użytkownicy</a>
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="projects.html" class="nav-item">Projects</a>
+                <a href="users.html" class="nav-item active">Users</a>
             </nav>
         </div>
     </header>
     <main>
         <div class="container">
             <form class="addForm" id="editUserForm">
-                <h1>Edytuj Użytkownika</h1>
-        
+                <h1>Edit User</h1>
+
                 <!-- Name -->
-                <label for="name">Imie:</label>
-                <input type="text" id="name" name="name" >
-        
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+
                 <!-- Email -->
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email">
+
                 <!-- Role -->
-                <label for="role">Rola:</label>
+                <label for="role">Role:</label>
                 <select id="role" name="role" required>
-                    <option value="">Wybierz Role</option>
+                    <option value="">Select Role</option>
                     <option value="Admin">Admin</option>
                     <option value="Developer">Developer</option>
                     <option value="Manager">Manager</option>
                 </select>
-        
+
                 <!-- Submit Button -->
-                <button class="btn" type="submit">Edytuj</button>
+                <button class="btn" type="submit">Save Changes</button>
             </form>
         </div>
-        
     </main>
 
     <footer>
-        <p>&copy; 2025 Project Manager. Wszystkie prawa zastrzeżone.</p>
+        <p>&copy; 2025 Project Manager. All rights reserved.</p>
     </footer>
 </body>
 </html>
