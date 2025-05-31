@@ -7,7 +7,7 @@ namespace ProjectManager.Domain.Contracts
         Task Commit();
         Task<AccessToken?> Get(int userId);
         Task<AccessToken?> Get(Guid id);
-        Task Add(AccessToken token);
+        Task<AccessToken?> Add(AccessToken token);
         Task Remove(AccessToken token);
     }
 }

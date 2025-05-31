@@ -24,14 +24,17 @@ namespace ProjectManager.Infrastructure.Migrations
 
             modelBuilder.Entity("ProjectManager.Domain.Entities.AccessToken", b =>
                 {
+                    b.Property<Guid>("TokenId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("ExpiresAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("TokenId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
+
+                    b.HasKey("TokenId");
 
                     b.ToTable("Tokens");
                 });

@@ -59,8 +59,12 @@ namespace ProjectManager.Infrastructure.Persistence
             modelBuilder.Entity<ProjectTask>()
                 .Property(pt => pt.Id)
                 .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<AccessToken>()
-                .HasNoKey();
+                .HasKey(at => at.TokenId);
+            modelBuilder.Entity<AccessToken>()
+                .Property(at => at.TokenId)
+                .ValueGeneratedOnAdd(); 
 
             modelBuilder.Entity<UserProject>()
                 .HasKey(up => new { up.UserId, up.ProjectId });

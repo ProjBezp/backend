@@ -1,6 +1,6 @@
 import { validate } from "./log_validation.js";
 
-const updateUserUrl = "http://localhost:5000/api/users/update"; // URL do edycji użytkownika
+const updateUserUrl = "http://localhost:80/api/users/update"; // URL do edycji użytkownika
 let currentUserId = null; // Przechowuje ID edytowanego użytkownika
 
 // Funkcja do aktualizacji użytkownika
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (userId) {
         try {
-            const response = await fetch(`http://localhost:5000/api/users/${userId}`, {
+            const response = await fetch(`http://localhost:80/api/users/${userId}`, {
                 method: 'GET',
                 headers: {
                     'TokenId': sessionStorage.getItem('TokenId')

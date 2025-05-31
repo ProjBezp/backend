@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using ProjectManager.Application.Common;
 using ProjectManager.Domain.Contracts;
 using AccessToken = ProjectManager.Domain.Entities.AccessToken;
+using Microsoft.Extensions.Logging;
 
 namespace ProjectManager.Application.Queries
 {
@@ -15,13 +16,15 @@ namespace ProjectManager.Application.Queries
         private readonly IUserRepository _userRepo;
         private readonly IOptions<AuthenticationOptions> _options;
         private readonly IPasswordHashingService _passwordHashingService;
+        private readonly ILogger<AuthenticateUserQueryHandler> _logger;
 
-        public AuthenticateUserQueryHandler(ITokenRepository tokenRepo, IUserRepository userRepo, IOptions<AuthenticationOptions> options, IPasswordHashingService passwordHashingService)
+        public AuthenticateUserQueryHandler(ITokenRepository tokenRepo, IUserRepository userRepo, IOptions<AuthenticationOptions> options, IPasswordHashingService passwordHashingService, ILogger<AuthenticateUserQueryHandler> logger)
         {
             _tokenRepo = tokenRepo;
             _userRepo = userRepo;
             _options = options;
             _passwordHashingService = passwordHashingService;
+            _logger = logger;
         }
 
         public async Task<CommandResult> Handle(AuthenticateUserQuery request, CancellationToken cancellationToken)
@@ -37,15 +40,21 @@ namespace ProjectManager.Application.Queries
 
                 var token = new AccessToken
                 {
-                    TokenId = Guid.NewGuid(),
+                    //TokenId = Guid.NewGuid(),
                     UserId = user.Id,
                     ExpiresAt = DateTime.Now.Add(_options.Value.AccessTokenLifeTime)
                 };
 
-                return CommandResult.Success(token);
+                token = await _tokenRepo.Add(token);
+
+                if (token is null)
+                    throw new Exception();
+
+                return CommandResult.Success(token.TokenId);
             }
             catch (Exception e)
             {
+                _logger.LogError("{e}", e.ToString());
                 return CommandResult.InternalServerError(e);
             }
         }

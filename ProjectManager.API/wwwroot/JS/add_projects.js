@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Wysyłane dane projektu:", projectData);
 
         try {
-            const response = await fetch("http://localhost:5000/api/projects/add", {
+            const response = await fetch("http://localhost:80/api/projects/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -14,10 +14,11 @@ namespace ProjectManager.Infrastructure.Repositories
             _db = db;
         }
 
-        public async Task Add(AccessToken token)
+        public async Task<AccessToken?> Add(AccessToken token)
         {
             await _db.Tokens.AddAsync(token);
             await Commit();
+            return token;
         }
 
         public async Task Commit()
