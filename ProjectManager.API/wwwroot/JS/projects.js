@@ -43,7 +43,7 @@ function displayProjects(projects) {
         <h3>${project.name}</h3>
         <p><strong>Description:</strong> ${project.description}</p>
         <p><strong>Status:</strong> ${project.status}</p>
-        <p><strong>Created date:</strong> ${new Date(project.createdAt).toLocaleDateString()}</p>
+        <p><strong>Created At:</strong> ${new Date(project.createdAt).toLocaleDateString()}</p>
         <p><strong>Start:</strong> ${new Date(project.startDate).toLocaleDateString()}</p>
         <p><strong>End:</strong> ${new Date(project.endDate).toLocaleDateString()}</p>
         <p><strong>Priority:</strong> ${project.priority}</p>
