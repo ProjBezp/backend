@@ -1,5 +1,5 @@
 import { validate } from "./log_validation.js";
-import { getAllUsersUrl, deleteUserUrl} from  "./urls.js"
+import { getAllUsersUrl, deleteUserUrl } from "./urls.js"
 
 async function handleUsers() {
     validate();
@@ -8,16 +8,16 @@ async function handleUsers() {
 
 async function fetchUsers() {
     console.log(sessionStorage.getItem('TokenId'));
-    
+
     try {
         const response = await fetch(getAllUsersUrl, {
             method: 'GET',
-            headers:{
+            headers: {
                 'TokenId': sessionStorage.getItem('TokenId')
             }
-        }); 
+        });
         if (!response.ok) {
-            if (response.status == 401){
+            if (response.status == 401) {
                 alert("User unauthorized");
                 window.location.href = "index.html";
             }
@@ -27,7 +27,7 @@ async function fetchUsers() {
         const users = await response.json();
         displayUsers(users);
     } catch (error) {
-        console.error('Błąd podczas pobierania danych:', error);
+        console.error('Error while fetching data:', error);
     }
 }
 
@@ -35,7 +35,7 @@ function displayUsers(users) {
     const userList = document.getElementById("user-list");
 
     if (!userList) {
-        console.error("Nie znaleziono elementu o ID 'user-list'");
+        console.error("Element with ID 'user-list' not found");
         return;
     }
 
@@ -47,11 +47,11 @@ function displayUsers(users) {
 
         userItem.innerHTML = `
         <h3>${user.name}</h3>
-        <p>Rola: ${user.role}</p>
+        <p>Role: ${user.role}</p>
         <p>Email: ${user.email}</p>
         <div class="buttons">
-            <button class="btn secondary edit-btn" data-id="${user.id}">Edytuj</button>
-            <button class="btn secondary delete-btn" data-id="${user.id}">Usuń</button>
+            <button class="btn secondary edit-btn" data-id="${user.id}">Edit</button>
+            <button class="btn secondary delete-btn" data-id="${user.id}">Delete</button>
         </div>
          `;
 
@@ -65,7 +65,7 @@ function displayUsers(users) {
             deleteUser(userId);
         });
     });
-    
+
     const editButtons = document.querySelectorAll(".edit-btn");
     editButtons.forEach(button => {
         button.addEventListener("click", (event) => {
@@ -78,28 +78,28 @@ function displayUsers(users) {
     addNewUser.classList.add("feature-item");
 
     addNewUser.innerHTML = `
-        <h3>Dodaj nowego użytkownika</h3>
-        <p>Wypełnij formularz, aby dodać użytkownika.</p>
-        <a href="users_add.html" class="a-button"><button class="btn secondary">Dodaj użytkownika</button></a>
+        <h3>Add new user</h3>
+        <p>Fill out the form to add a user.</p>
+        <a href="users_add.html" class="a-button"><button class="btn secondary">Add user</button></a>
     `;
 
     userList.appendChild(addNewUser);
 }
 
-async function deleteUser(id){
+async function deleteUser(id) {
     try {
-        const response = await fetch(deleteUserUrl.replace("#id", id),{
+        const response = await fetch(deleteUserUrl.replace("#id", id), {
             method: 'GET',
             headers: {
                 'TokenId': sessionStorage.getItem('TokenId')
             }
-        }); 
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         await fetchUsers();
     } catch (error) {
-        console.error('Błąd podczas pobierania danych:', error);
+        console.error('Error while fetching data:', error);
     }
 }
 

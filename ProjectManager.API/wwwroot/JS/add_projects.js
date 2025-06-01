@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             priority: document.getElementById("priority").value,
         };
 
-        console.log("Wysyłane dane projektu:", projectData);
+        console.log("Sent project data:", projectData);
 
         try {
             const response = await fetch(addProjectUrl, {
@@ -31,15 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
-                alert("Projekt został dodany!");
+                alert("The project has been added!");
                 document.getElementById("projectForm").reset(); // Resetowanie formularza
                 window.location.href = "/projects.html";
             } else {
-                alert("Wystąpił błąd. Spróbuj ponownie.");
+                alert("An error occurred. Please try again!");
             }
         } catch (error) {
-            console.error("Błąd podczas dodawania projektu:", error);
-            alert("Wystąpił błąd. Sprawdź konsolę.");
+            console.error("Error while adding project:", error);
+            alert("An error ocured.Please check the console");
         }
     });
 });

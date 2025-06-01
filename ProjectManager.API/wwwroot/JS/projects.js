@@ -20,7 +20,7 @@ async function fetchProjects() {
         const projects = await response.json();
         displayProjects(projects);
     } catch (error) {
-        console.error("Błąd podczas pobierania projektów:", error);
+        console.error("Error downloading projects:", error);
     }
 }
 
@@ -29,7 +29,7 @@ function displayProjects(projects) {
     const projectList = document.getElementById("project-list");
 
     if (!projectList) {
-        console.error("Nie znaleziono elementu o ID 'project-list'");
+        console.error("No item with ID 'project-list' found");
         return;
     }
 
@@ -41,15 +41,15 @@ function displayProjects(projects) {
 
         projectItem.innerHTML = `
         <h3>${project.name}</h3>
-        <p><strong>Opis:</strong> ${project.description}</p>
+        <p><strong>Description:</strong> ${project.description}</p>
         <p><strong>Status:</strong> ${project.status}</p>
-        <p><strong>Data utworzenia:</strong> ${new Date(project.createdAt).toLocaleDateString()}</p>
+        <p><strong>Created date:</strong> ${new Date(project.createdAt).toLocaleDateString()}</p>
         <p><strong>Start:</strong> ${new Date(project.startDate).toLocaleDateString()}</p>
-        <p><strong>Koniec:</strong> ${new Date(project.endDate).toLocaleDateString()}</p>
-        <p><strong>Priorytet:</strong> ${project.priority}</p>
+        <p><strong>End:</strong> ${new Date(project.endDate).toLocaleDateString()}</p>
+        <p><strong>Priority:</strong> ${project.priority}</p>
         <div class="buttons">
-            <button class="btn secondary edit-btn" data-id="${project.id}">Edytuj</button>
-            <button class="btn secondary delete-btn" data-id="${project.id}">Usuń</button>
+            <button class="btn secondary edit-btn" data-id="${project.id}">Edit</button>
+            <button class="btn secondary delete-btn" data-id="${project.id}">Delete</button>
         </div>
         `;
 
@@ -77,9 +77,9 @@ function displayProjects(projects) {
     addNewProject.classList.add("feature-item");
 
     addNewProject.innerHTML = `
-        <h3>Dodaj nowy projekt</h3>
-        <p>Wypełnij formularz, aby dodać projekt.</p>
-        <a href="add_projects.html" class="a-button"><button class="btn secondary">Dodaj projekt</button></a>
+        <h3>Add new project</h3>
+        <p>Fill out the form to add a project.</p>
+        <a href="add_projects.html" class="a-button"><button class="btn secondary">Add project</button></a>
     `;
 
     projectList.appendChild(addNewProject);
@@ -99,7 +99,7 @@ async function deleteProject(id) {
         }
         await fetchProjects(); // Odświeżenie listy projektów po usunięciu
     } catch (error) {
-        console.error("Błąd podczas usuwania projektu:", error);    
+        console.error("Error deleting project:", error);    
     }
 }
 
