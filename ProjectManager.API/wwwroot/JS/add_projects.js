@@ -1,5 +1,10 @@
+import { addProjectUrl } from "./urls.js"
+import { validate } from "./log_validation.js"
+
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("projectForm").addEventListener("submit", async function (event) {
+        await validate();
+
         event.preventDefault(); // Zapobiega przeładowaniu strony
 
         // Pobranie wartości z formularza
@@ -15,11 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Wysyłane dane projektu:", projectData);
 
         try {
-            const response = await fetch("http://localhost:80/api/projects/add", {
+            const response = await fetch(addProjectUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "*/*"
+                    "Accept": "*/*",
+                    'TokenId': sessionStorage.getItem('TokenId')
                 },
                 body: JSON.stringify(projectData),
             });

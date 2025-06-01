@@ -1,10 +1,5 @@
 import { validate } from "./log_validation.js";
-
-const getAllUrl = 'http://localhost:80/api/users/all'; 
-const deleteUrl = 'http://localhost:80/api/users/delete/#id'
-const addUrl = "http://localhost:80/api/users/add"
-const editUrl = "http://localhost:80/api/users/update"
-
+import { getAllUsersUrl, deleteUserUrl} from  "./urls.js"
 
 async function handleUsers() {
     validate();
@@ -15,7 +10,7 @@ async function fetchUsers() {
     console.log(sessionStorage.getItem('TokenId'));
     
     try {
-        const response = await fetch(getAllUrl, {
+        const response = await fetch(getAllUsersUrl, {
             method: 'GET',
             headers:{
                 'TokenId': sessionStorage.getItem('TokenId')
@@ -93,7 +88,7 @@ function displayUsers(users) {
 
 async function deleteUser(id){
     try {
-        const response = await fetch(deleteUrl.replace("#id", id),{
+        const response = await fetch(deleteUserUrl.replace("#id", id),{
             method: 'GET',
             headers: {
                 'TokenId': sessionStorage.getItem('TokenId')

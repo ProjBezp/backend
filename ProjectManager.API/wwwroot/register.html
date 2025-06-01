@@ -3,7 +3,7 @@
 <head>
     <title>PROJECT MANAGER</title>
     <link rel="stylesheet" href="CSS/styles.css">
-    <script src="JS/register.js"></script>
+    <script type="module" src="/JS/register.js" defer></script>
 </head>
 <body class="body1">
 
@@ -21,7 +21,7 @@
 
         <div class="buttons">
             <button onclick="window.location.href='log.html'" class="button2" type="button">Back</button>
-            <button onclick="event.preventDefault(); registerUser()" class="button1" type="button">Register</button>
+            <button id="registerButton" class="button1" type="button">Register</button>
         </div>
     </form>
 

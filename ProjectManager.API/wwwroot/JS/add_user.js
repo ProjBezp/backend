@@ -1,8 +1,7 @@
-const addUserUrl = "http://localhost:80/api/users/add";
+import { addUserUrl } from "./urls.js";
 
-// Funkcja do dodawania użytkownika
-function addUser(event) {
-    event.preventDefault(); // Zatrzymanie domyślnego zachowania formularza (przeładowanie strony)
+async function addUser(event) {
+    event.preventDefault(); // zapobiegamy przeładowaniu strony
 
     console.log("add user");
     const form = document.getElementById("addUserForm");
@@ -17,30 +16,30 @@ function addUser(event) {
     console.log("pre post");
 
     try {
-        fetch(addUserUrl, {
+        const response = await fetch(addUserUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
                 "Access-Control-Allow-Origin": "*",
+                'TokenId': sessionStorage.getItem('TokenId')
             },
             body: JSON.stringify(user),
-        }).then(response => {
-            if (response.ok) {
-                alert("User added successfully!");
-                document.getElementById("addUserForm").reset(); // Resetowanie formularza po pomyślnym dodaniu
-                window.location.href = "/users.html";
-            } else {
-                alert("Error adding user. Please try again.");
-            }
         });
+
+        if (response.ok) {
+            alert("User added successfully!");
+            form.reset();
+            window.location.href = "/users.html";
+        } else {
+            alert("Error adding user. Please try again.");
+        }
     } catch (error) {
         console.error("Error:", error);
         alert("An error occurred. Please check the console for details.");
     }
 }
 
-// Dodanie nasłuchiwacza do formularza po załadowaniu strony
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("addUserForm").addEventListener("submit", addUser);
 });

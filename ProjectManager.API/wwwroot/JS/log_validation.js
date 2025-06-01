@@ -1,5 +1,4 @@
-const getTokenUrl = "http://localhost:80/api/auth/user";
-const validateUrl = "http://localhost:80/api/auth/token"
+import { validateUrl, getTokenUrl} from "./urls.js"
 
 export function validate(){
     const tokenBody = {

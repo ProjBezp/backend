@@ -1,29 +1,39 @@
-const registerUrl = "http://localhost:80/api/register"
+import { registerUrl, API_URL } from "./urls.js";
 
-async function registerUser(){
-    form = document.getElementById("registerForm")
-    
+async function registerUser() {
+    console.log(registerUrl);
+    const form = document.getElementById("registerForm");
+
     const registerForm = {
         name: form.elements["name"].value,
         email: form.elements["email"].value,
         password: form.elements["password"].value
     };
 
-    await fetch(registerUrl, {
+    const response = await fetch(registerUrl, {
         method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "*/*",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify(registerForm),
-    }).then(response => {
-        if (response.ok) {
-            alert("User added successfully!");
-            window.location.href = "log.html";
-        } else {
-            alert(`Error while registering: ${response.text()} user. Please try again.`);
-            form.reset();
-        }
-    })
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "*/*",
+        },
+        body: JSON.stringify(registerForm),
+    });
+
+    if (response.ok) {
+        alert("User added successfully!");
+        window.location.href = "log.html";
+    } else {
+        const errorText = await response.text();
+        alert(`Error while registering: ${errorText}. Please try again.`);
+        form.reset();
+    }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("registerButton");
+    button.addEventListener("click", async (event) => {
+        console.log(API_URL);
+        event.preventDefault();
+        await registerUser();
+    });
+});

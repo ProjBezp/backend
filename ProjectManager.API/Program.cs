@@ -33,14 +33,23 @@ namespace ProjectManager.API
             // add mediatr for controllers
             builder.Services.AddAppMediatR(builder.Configuration);
 
-            builder.Services.AddCors(options =>
+            /*builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin", policy =>
-                    policy.WithOrigins("*")
-                          .AllowAnyMethod()
-                          .AllowAnyHeader()
+                    policy
+                        .WithOrigins(
+#if DEBUG
+                            "http://localhost",
+                            "http://localhost:80",
+#endif
+                            "https://projectmanagerapi-app-2025052718.wonderfulwave-2a703125.polandcentral.azurecontainerapps.io"
+                        )
+                        .SetIsOriginAllowed(_ => true)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
                 );
-            });
+            });*/
+
             builder.Services.AddAuthenticationOptions(builder.Configuration);
 
             var app = builder.Build();
@@ -57,10 +66,24 @@ namespace ProjectManager.API
             }
 
             app.UseStaticFiles();
-            // app.UseHttpsRedirection();
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Method == "OPTIONS")
+                {
+                    context.Response.StatusCode = 200;
+                    await context.Response.CompleteAsync();
+                }
+                else
+                {
+                    await next();
+                }
+            });
+
+            // app.UsehttpRedirection();
+            //app.UseCors("AllowSpecificOrigin");
             app.UseAuthorization();
             app.MapControllers();
-            app.UseCors("AllowSpecificOrigin");
             app.MapFallbackToFile("log.html");
             // app.MapGet("/", () => "OK");
             app.MapGet("/health", () => "OK");

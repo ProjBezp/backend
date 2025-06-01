@@ -1,12 +1,19 @@
-const getAllProjectsUrl = "http://localhost:80/api/projects/all";
-const deleteProjectUrl = "http://localhost:80/api/projects/delete/#id";
-const addProjectUrl = "http://localhost:80/api/projects/add";
-const editProjectUrl = "http://localhost:80/api/projects/update";
+import { getAllProjectsUrl, deleteProjectUrl} from "./urls.js"
+import { validate } from "./log_validation.js"
 
-// Pobieranie i wyświetlanie projektów
+async function handleProjects() {
+    validate();
+    fetchProjects();
+}
+
 async function fetchProjects() {
     try {
-        const response = await fetch(getAllProjectsUrl);
+        const response = await fetch(getAllProjectsUrl, {
+            method: 'GET',
+            headers: {
+                'TokenId': sessionStorage.getItem('TokenId')
+            }
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -81,7 +88,12 @@ function displayProjects(projects) {
 // Funkcja do usuwania projektu
 async function deleteProject(id) {
     try {
-        const response = await fetch(deleteProjectUrl.replace("#id", id), { method: "GET" });
+        const response = await fetch(deleteProjectUrl.replace("#id", id), {
+            method: "GET",
+            headers: {
+                'TokenId': sessionStorage.getItem('TokenId')
+            }
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -97,4 +109,4 @@ async function editProject(id) {
 }
 
 // Pobranie listy projektów po załadowaniu strony
-document.addEventListener("DOMContentLoaded", fetchProjects);
+document.addEventListener("DOMContentLoaded", handleProjects);

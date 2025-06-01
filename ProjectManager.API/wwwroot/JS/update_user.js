@@ -1,6 +1,5 @@
 import { validate } from "./log_validation.js";
-
-const updateUserUrl = "http://localhost:80/api/users/update"; // URL do edycji użytkownika
+import { editUserUrl, API_URL } from "./urls.js"
 let currentUserId = null; // Przechowuje ID edytowanego użytkownika
 
 // Funkcja do aktualizacji użytkownika
@@ -20,7 +19,7 @@ function updateUser(event) {
         role: form.elements["role"].value,
     };
 
-    fetch(updateUserUrl, {
+    fetch(editUserUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -56,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (userId) {
         try {
-            const response = await fetch(`http://localhost:80/api/users/${userId}`, {
+            const response = await fetch(`${API_URL}:80/api/users/${userId}`, {
                 method: 'GET',
                 headers: {
                     'TokenId': sessionStorage.getItem('TokenId')
