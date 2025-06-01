@@ -17,8 +17,8 @@ namespace ProjectManager.API
                 Console.WriteLine("Unhandled Exception: " + e.ExceptionObject?.ToString());
             };
 
-
             var builder = WebApplication.CreateBuilder(args);
+            builder.Configuration.AddEnvironmentVariables();
 
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
