@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>PROJECT MANAGER</title>
-<link rel="stylesheet" href="CSS/styles.css">
-<script type="module" src="/JS/log.js"></script>
+    <title>PROJECT MANAGER</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <script type="module" src="/JS/log.js"></script>
+    <script src="/JS/show_password.js" defer></script>
 </head>
 <body class="body1">
 
@@ -12,9 +13,15 @@
     <form>
         <label class="text1" for="login">Email:</label>
         <input type="text" id="login" name="login" required><br>
-        
+
         <label class="text1" for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
+        <div class="password-container">
+            <input type="password" id="password" name="password" required>
+            <button class="toggle-password" type="button" data-target="password" aria-label="Show or hide password">
+                <img src="Images/eye-open.svg" class="eye-icon open" alt="Show password">
+                <img src="Images/eye-closed.svg" class="eye-icon closed" alt="Hide password">
+            </button>
+        </div><br>
 
         <div class="buttons">
             <button onclick="window.location.href= 'register.html'" class="button2" type="button">Register</button>

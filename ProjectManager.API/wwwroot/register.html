@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>PROJECT MANAGER</title>
     <link rel="stylesheet" href="CSS/styles.css">
     <script type="module" src="/JS/register.js" defer></script>
+    <script src="/JS/show_password.js" defer></script>
 </head>
 <body class="body1">
 
@@ -17,11 +18,26 @@
         <input type="text" id="email" name="email" required><br>
 
         <label class="text1" for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
+        <div class="password-container">
+            <input type="password" id="password" name="password" required>
+            <button class="toggle-password" type="button" data-target="password" aria-label="Show or hide password">
+                <img src="Images/eye-open.svg" class="eye-icon open" alt="Show password">
+                <img src="Images/eye-closed.svg" class="eye-icon closed" alt="Hide password">
+            </button>
+        </div><br>
+
+        <label class="text1" for="confirmPassword">Confirm password:</label>
+        <div class="password-container">
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <button class="toggle-password" type="button" data-target="confirmPassword" aria-label="Show or hide confirm password">
+                <img src="Images/eye-open.svg" class="eye-icon open" alt="Show password">
+                <img src="Images/eye-closed.svg" class="eye-icon closed" alt="Hide password">
+            </button>
+        </div>
 
         <div class="buttons">
             <button onclick="window.location.href='log.html'" class="button2" type="button">Back</button>
-            <button id="registerButton" class="button1" type="button">Register</button>
+            <button id="registerButton" class="button1" type="submit">Register</button>
         </div>
     </form>
 

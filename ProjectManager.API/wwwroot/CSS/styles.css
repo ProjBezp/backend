@@ -338,6 +338,62 @@ input[type="text"] {
     transition: transform 0.6s ease;
 }
 
+.password-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    width: 100%;
+}
+
+    .password-container input {
+        flex: 1;
+        padding: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+.toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+.eye-icon {
+    width: 20px;
+    height: 20px;
+    display: none;
+    padding-bottom: 80%;
+}
+
+    .eye-icon.open {
+        display: block;
+    }
+
+.toggle-password.showing .open {
+    display: none;
+}
+
+.toggle-password.showing .closed {
+    display: block;
+}
+
+#passwordError {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
+}
+
 
 @media (max-width: 768px) {
     .addForm {

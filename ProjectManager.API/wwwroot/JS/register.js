@@ -1,14 +1,25 @@
 import { registerUrl, API_URL } from "./urls.js";
 
 async function registerUser() {
-    console.log(registerUrl);
     const form = document.getElementById("registerForm");
 
-    const registerForm = {
-        name: form.elements["name"].value,
-        email: form.elements["email"].value,
-        password: form.elements["password"].value
-    };
+    const name = form.elements["name"].value;
+    const email = form.elements["email"].value;
+    const password = form.elements["password"].value;
+    const confirmPassword = form.elements["confirmPassword"].value;
+
+    const errorMsg = document.getElementById("passwordError");
+
+    if (!password || !confirmPassword || password !== confirmPassword) {
+        errorMsg.textContent = "Passwords must not be empty and must match!";
+        form.elements["password"].value = "";
+        form.elements["confirmPassword"].value = "";
+        return;
+    } else {
+        errorMsg.textContent = "";
+    }
+
+    const registerForm = { name, email, password };
 
     const response = await fetch(registerUrl, {
         method: "POST",
@@ -25,14 +36,26 @@ async function registerUser() {
     } else {
         const errorText = await response.text();
         alert(`Error while registering: ${errorText}. Please try again.`);
-        form.reset();
+        form.elements["password"].value = "";
+        form.elements["confirmPassword"].value = "";
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById("registerButton");
+
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    let errorMsg = document.getElementById("passwordError");
+    if (!errorMsg) {
+        errorMsg = document.createElement("div");
+        errorMsg.id = "passwordError";
+        errorMsg.style.color = "red";
+        errorMsg.style.fontSize = "14px";
+        errorMsg.style.marginTop = "4px";
+        confirmPasswordInput.parentNode.parentNode.insertBefore(errorMsg, confirmPasswordInput.parentNode.nextSibling);
+    }
+
     button.addEventListener("click", async (event) => {
-        console.log(API_URL);
         event.preventDefault();
         await registerUser();
     });

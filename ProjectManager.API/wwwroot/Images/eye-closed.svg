@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <!-- Oko (identyczne jak w eye-open.svg) -->
+  <path d="M12 4.5C7.5 4.5 3.8 7.4 2 12c1.8 4.6 5.5 7.5 10 7.5s8.2-2.9 10-7.5c-1.8-4.6-5.5-7.5-10-7.5zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10.5c-2.5 0-4.5 2-4.5 4.5S9.5 16.5 12 16.5 16.5 14.5 16.5 12 14.5 7.5 12 7.5z" fill="#4a90e2"></path>
+  
+  <!-- Przekreślająca linia -->
+  <line x1="4" y1="4" x2="20" y2="20" stroke="#4a90e2" stroke-width="2"></line>
+</svg>
