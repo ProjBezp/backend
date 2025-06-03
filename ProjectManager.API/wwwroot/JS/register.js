@@ -57,6 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     button.addEventListener("click", async (event) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        console.log();
+>>>>>>> fc2f20c2ed9abf091b49f04e48936dfaeac7db5b
 =======
         console.log();
 >>>>>>> fc2f20c2ed9abf091b49f04e48936dfaeac7db5b
