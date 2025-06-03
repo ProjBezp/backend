@@ -1,4 +1,4 @@
-import { registerUrl } from "./urls.js";
+import { registerUrl, API_URL } from "./urls.js";
 
 async function registerUser() {
     const form = document.getElementById("registerForm");
@@ -9,6 +9,7 @@ async function registerUser() {
     const confirmPassword = form.elements["confirmPassword"].value;
 
     const errorMsg = document.getElementById("passwordError");
+
 
     if (!password || !confirmPassword || password !== confirmPassword) {
         errorMsg.textContent = "Passwords must not be empty and must match!";
@@ -56,14 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     button.addEventListener("click", async (event) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        console.log();
->>>>>>> fc2f20c2ed9abf091b49f04e48936dfaeac7db5b
-=======
-        console.log();
->>>>>>> fc2f20c2ed9abf091b49f04e48936dfaeac7db5b
         event.preventDefault();
         await registerUser();
     });
