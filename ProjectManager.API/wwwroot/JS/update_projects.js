@@ -1,10 +1,10 @@
-import { updateProjectUrl, API_URL } from "./urls.js"
+import { updateProjectUrl } from "./urls.js"
 import { validate } from "./log_validation.js"
 let currentProjectId = null; // Przechowuje ID edytowanego projektu
 
 // Funkcja do pobrania projektu i wypełnienia formularza
 function editProject(projectId) {
-    fetch(`${API_URL}:80/api/projects/${projectId}`)
+    fetch(`/api/projects/${projectId}`)
         .then(response => response.json())
         .then(project => {
             currentProjectId = projectId; // Przypisanie ID edytowanego projektu
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (projectId) {
         try {
-            const response = await fetch(`${API_URL}:80/api/projects/${projectId}`);
+            const response = await fetch(`/api/projects/${projectId}`);
             const project = await response.json();
 
             const form = document.getElementById("editProjectForm");

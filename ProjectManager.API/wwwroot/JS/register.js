@@ -1,4 +1,4 @@
-import { registerUrl, API_URL } from "./urls.js";
+import { registerUrl } from "./urls.js";
 
 async function registerUser() {
     const form = document.getElementById("registerForm");
@@ -56,6 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     button.addEventListener("click", async (event) => {
+<<<<<<< HEAD
+=======
+        console.log();
+>>>>>>> fc2f20c2ed9abf091b49f04e48936dfaeac7db5b
         event.preventDefault();
         await registerUser();
     });

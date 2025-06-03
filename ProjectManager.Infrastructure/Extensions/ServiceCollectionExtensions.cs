@@ -15,8 +15,9 @@ namespace ProjectManager.Infrastructure.Extensions
             services.AddDbContext<AppDbContext>(options =>
             {
                 var connectionString = configuration["Sql_ConnectionString"];
-                //var connectionString = configuration.GetConnectionString("DefaultConnection");
-
+#if DEBUG
+                connectionString = configuration.GetConnectionString("DefaultConnection");
+#endif
                 try
                 {
                     options.UseSqlServer(connectionString)
