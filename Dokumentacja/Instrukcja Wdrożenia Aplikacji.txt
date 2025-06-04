@@ -1,0 +1,125 @@
+===========
+Instrukcja konfiguracji środowiska w Microsoft Azure:
+- Grupa zasobów
+- SQL Database
+- Azure Container App
+- Publikacja aplikacji z Visual Studio
+
+==================================================
+1. WYMAGANIA WSTĘPNE
+==================================================
+- Konto w Microsoft Azure: https://portal.azure.com
+- Visual Studio: https://www.jetbrains.com/resharper/download/download-thanks.html
+- Zainstalowane rozszerzenia w VS:
+  - Azure Account
+  - Azure Container Apps
+  - Azure Resources
+- Zainstalowany **Docker Desktop**: https://www.docker.com/products/docker-desktop/
+  - Docker Desktop musi być uruchomiony i poprawnie skonfigurowany, ponieważ podczas publikacji przez Visual Studio aplikacja jest automatycznie budowana lokalnie jako obraz kontenera.
+
+==================================================
+2. LOGOWANIE DO AZURE Z VS
+==================================================
+1. Otwórz Visual Studio.
+2. Wciśnij `Ctrl+Shift+P`, wpisz i wybierz: **Azure: Sign In**.
+3. Zaloguj się do konta Azure w przeglądarce.
+
+Po poprawnym zalogowaniu w lewym panelu "AZURE" powinny być widoczne Twoje subskrypcje i zasoby.
+
+==================================================
+3. UTWORZENIE GRUPY ZASOBÓW
+==================================================
+1. Zaloguj się do portalu: https://portal.azure.com
+2. Wybierz z menu po lewej: **Grupy zasobów** → kliknij **+ Utwórz**.
+3. Uzupełnij dane:
+   - Subskrypcja: wybierz swoją
+   - Nazwa grupy zasobów: `MojaGrupaZasobów`
+   - Region: np. `West Europe`
+4. Kliknij: **Przejrzyj + utwórz** → **Utwórz**
+
+==================================================
+4. UTWORZENIE SQL DATABASE
+==================================================
+1. W portalu Azure wyszukaj **SQL Database** → kliknij **+ Dodaj**
+2. Uzupełnij dane:
+   - Subskrypcja: [Twoja]
+   - Grupa zasobów: `MojaGrupaZasobów`
+   - Nazwa bazy danych: `MojaBazaSQL`
+3. Utwórz nowy serwer:
+   - Nazwa: np. `mojserwer-sql`
+   - Login administratora: `adminuser`
+   - Hasło: silne hasło
+   - Region: ten sam co grupa zasobów
+4. Kliknij **Przejrzyj + utwórz** → **Utwórz**
+5. Po utworzeniu przejdź do serwera SQL → **Zapora i sieć wirtualna**
+   - Kliknij **+ Dodaj klienta IP** → **Zapisz**
+
+==================================================
+5. UTWORZENIE CONTAINER APP
+==================================================
+1. W portalu Azure wyszukaj **Container Apps** → kliknij **+ Utwórz**
+2. W zakładce „Podstawowe”:
+   - Subskrypcja: [Twoja]
+   - Grupa zasobów: `MojaGrupaZasobów`
+   - Nazwa aplikacji: `MojaAplikacja`
+   - Region: ten sam co wcześniej
+3. Utwórz nowe środowisko (np. `moje-srodowisko-app`)
+4. W sekcji „Kontener”:
+   - Wybierz opcję „Źródło kodu” tylko jeśli publikujesz z GitHub
+   - W przypadku publikacji z VS wybierz dowolny obraz tymczasowy – zostanie nadpisany
+5. Kliknij **Przejrzyj + utwórz** → **Utwórz**
+
+==================================================
+6. PUBLIKACJA APLIKACJI Z VISUAL STUDIO
+==================================================
+1. Otwórz folder z projektem w Visual Studio.
+2. Upewnij się, że aplikacja zawiera:
+   - plik `Dockerfile` w katalogu głównym
+   - plik `appsettings.json` (jeśli łączysz się z SQL)
+3. Upewnij się, że **Docker Desktop** jest uruchomiony – VS użyje go do zbudowania lokalnego obrazu Dockera.
+4. Kliknij ikonę Azure w lewym pasku bocznym.
+5. Rozwiń sekcję „Container Apps” → Twoja subskrypcja → grupa zasobów.
+6. Kliknij prawym przyciskiem myszy na `MojaAplikacja` → wybierz **Deploy to Container App**.
+7. Wskaż katalog z aplikacją → rozpocznij proces publikacji.
+8. Visual Studio automatycznie:
+   - Zbuduje obraz Dockera przy użyciu Docker Desktop
+   - Opublikuje go do Azure Container Registry
+   - Wdroży obraz do Twojej Container App
+
+Po zakończeniu otrzymasz publiczny URL aplikacji (widoczny także w Azure Portal).
+
+==================================================
+7. KONFIGURACJA ZMIENNYCH ŚRODOWISKOWYCH W CONTAINER APP
+==================================================
+1. W portalu przejdź do SQL Database → **Connection strings**
+2. Skopiuj ciąg połączenia do SQL Servera (ADO.NET lub inny)
+3. Przejdź do swojej grupy zasobów.
+4. Wybierz swoją aplikację MojaAplikacja.
+5. W menu po lewej stronie kliknij Configuration, a następnie przejdź do zakładki Environment variables.
+6. Kliknij + Add.
+7. Wprowadź następujące dane:
+
+Name: Sql_ConnectionString
+
+Value: Wklej ciąg połączenia do bazy danych SQL, który można skopiowałeś z sekcji Connection strings w Twojej bazie danych SQL.
+
+8. Kliknij Apply, aby zapisać zmiany.
+
+==================================================
+8. PORÓWNANIE WERSJI BASIC I STANDARD DLA AZURE CONTAINER APPS
+==================================================
+Funkcja	Wersja Basic:				Wersja Standard
+Obsługa autoskalowania:				✅ Tak	✅ Tak
+Wsparcie dla sieci wirtualnych (VNet):		❌ Nie	✅ Tak
+Maksymalna liczba instancji:			1	Wiele
+Koszt:					💰 Niższy	💸 Wyższy
+
+Na potrzeby niniejszego projektu wybrano wersję Basic, ponieważ generuje ona niższe koszty utrzymania oraz w pełni wystarcza do prostych wdrożeń bez potrzeby zaawansowanych integracji sieciowych.
+
+==================================================
+9. SPRAWDZENIE DZIAŁANIA
+==================================================
+1. Otwórz podany przez Azure link do aplikacji.
+2. Aplikacja powinna być publicznie dostępna.
+3. Sprawdź działanie połączenia z bazą danych (np. logowanie, odczyt danych).
+
